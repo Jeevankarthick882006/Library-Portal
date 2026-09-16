@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Library Portal - Mini Project Report</title>
+<style>
+  @page {
+    size: A4;
+    margin: 22mm 20mm 25mm 20mm;
+    @bottom-center {
+      content: counter(page);
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 11pt;
+      color: #222;
+    }
+  }
+
+  body {
+    font-family: 'Times New Roman', Times, Georgia, serif;
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #111;
+    margin: 0;
+    padding: 0;
+  }
+
+  .page {
+    page-break-after: always;
+    position: relative;
+    box-sizing: border-box;
+    padding: 5px 0;
+  }
+
+  .page:last-child {
+    page-break-after: avoid;
+  }
+
+  table {
+    page-break-inside: avoid;
+  }
+
+  .diagram-container {
+    page-break-inside: avoid;
+  }
+
+  /* Typography */
+  h1, h2, h3, h4 {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .text-center { text-align: center; }
+  .text-justify { text-align: justify; }
+  .text-right { text-align: right; }
+  .bold { font-weight: bold; }
+  .uppercase { text-transform: uppercase; }
+
+  /* Cover Page */
+  .college-header {
+    text-align: center;
+    border-bottom: 2px solid #800000;
+    padding-bottom: 12px;
+    margin-bottom: 40px;
+  }
+  .college-name {
+    color: #8b0000;
+    font-size: 16pt;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+  .college-sub {
+    font-size: 8.5pt;
+    color: #333;
+    margin-top: 4px;
+    line-height: 1.3;
+  }
+
+  .project-main-title {
+    font-size: 22pt;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-top: 50px;
+    margin-bottom: 15px;
+  }
+  .project-report-title {
+    font-size: 14pt;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 45px;
+  }
+
+  .submitted-by {
+    font-style: italic;
+    font-size: 12pt;
+    margin-bottom: 15px;
+  }
+  .student-name {
+    font-size: 13pt;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    margin-bottom: 40px;
+  }
+
+  .award-degree {
+    font-style: italic;
+    font-size: 12pt;
+    margin-bottom: 10px;
+  }
+  .degree-name {
+    font-size: 13pt;
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+  .dept-name {
+    font-size: 12pt;
+    font-weight: bold;
+    margin-bottom: 45px;
+  }
+
+  .cover-footer {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  /* Chapter Header */
+  .chapter-header {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  .chapter-title {
+    font-size: 14pt;
+    font-weight: bold;
+    margin-bottom: 12px;
+  }
+  .chapter-subtitle {
+    font-size: 13pt;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+
+  .section-title {
+    font-size: 12pt;
+    font-weight: bold;
+    margin-top: 18px;
+    margin-bottom: 8px;
+  }
+  .subsection-title {
+    font-size: 11pt;
+    font-weight: bold;
+    margin-top: 14px;
+    margin-bottom: 6px;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 12px;
+    text-align: justify;
+    line-height: 1.5;
+  }
+
+  ul {
+    margin-top: 4px;
+    margin-bottom: 12px;
+    padding-left: 24px;
+  }
+  li {
+    margin-bottom: 6px;
+    line-height: 1.45;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 10.5pt;
+  }
+  th, td {
+    border: 1px solid #333;
+    padding: 7px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  .table-caption {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 8px;
+    font-size: 11pt;
+  }
+
+  /* Table of Contents dot leaders */
+  .toc-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 6px;
+    font-size: 11pt;
+  }
+  .toc-title {
+    background: white;
+    padding-right: 5px;
+    z-index: 2;
+  }
+  .toc-page {
+    background: white;
+    padding-left: 5px;
+    font-weight: bold;
+    z-index: 2;
+  }
+  .toc-dots {
+    flex-grow: 1;
+    border-bottom: 1px dotted #555;
+    margin-bottom: 4px;
+  }
+
+  /* Code snippet block */
+  .code-block {
+    background: #f8f9fa;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    padding: 12px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 9pt;
+    line-height: 1.35;
+    white-space: pre-wrap;
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+
+  /* Diagram Box */
+  .diagram-container {
+    border: 1px solid #999;
+    background: #fafafa;
+    border-radius: 6px;
+    padding: 15px;
+    margin: 15px auto;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 9pt;
+    line-height: 1.3;
+    white-space: pre;
+    max-width: 95%;
+    overflow-x: hidden;
+  }
+  .fig-caption {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 8px;
+    margin-bottom: 15px;
+    font-size: 10.5pt;
+  }
+
+  .signature-block {
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= PAGE 1: COVER PAGE ================= -->
+<div class="page">
+  <div class="college-header">
+    <div class="college-name">SRI KRISHNA COLLEGE OF ENGINEERING AND TECHNOLOGY</div>
+    <div class="college-sub">
+      An Autonomous Institution | Approved by AICTE | Affiliated to Anna University | Accredited by NAAC with A++ Grade<br>
+      Kuniamuthur, Coimbatore – 641008<br>
+      Phone : (0422)-2678001 (7 Lines) | Email : info@skcet.ac.in | Website : www.skcet.ac.in
+    </div>
+  </div>
+
+  <div class="text-center" style="margin-top: 40px;">
+    <div class="project-main-title">LIBRARY PORTAL</div>
+    <div class="project-report-title">A MINI PROJECT REPORT</div>
+
+    <div class="submitted-by">Submitted by</div>
+    <div class="student-name">JEEVAN KARTHICK (2403727710621107)</div>
+
+    <div class="award-degree">In partial fulfilment for the award of the degree</div>
+    <div class="award-degree">of</div>
+    <div class="degree-name">BACHELOR OF ENGINEERING</div>
+    <div class="award-degree">IN</div>
+    <div class="dept-name">ELECTRONICS AND COMMUNICATION ENGINEERING</div>
+
+    <div class="cover-footer">
+      <div class="bold" style="font-size: 11pt;">SRI KRISHNA COLLEGE OF ENGINEERING AND TECHNOLOGY</div>
+      <div style="font-size: 9.5pt; margin-top: 3px;">An Autonomous Institution | Approved by AICTE | Affiliated to Anna University | Accredited by NAAC with A++ Grade</div>
+      <div style="font-size: 9.5pt; margin-top: 2px;">Kuniamuthur, Coimbatore – 641008.</div>
+      <div class="bold" style="font-size: 12pt; margin-top: 30px;">2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= PAGE 2: SUSTAINABLE DEVELOPMENT GOALS ================= -->
+<div class="page">
+  <div class="text-center bold uppercase" style="font-size: 13pt; margin-bottom: 20px;">
+    SUSTAINABLE DEVELOPMENT GOALS
+  </div>
+  <p>
+    The Sustainable Development Goals are a collection of 17 global goals designed as a blueprint to 
+    achieve a better and more sustainable future for all. The SDGs, set in 2015 by the United Nations 
+    General Assembly, are intended to be achieved by the year 2030. The project is based on these 
+    17 goals.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 40%;">Question</th>
+        <th style="width: 60%;">Answer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="bold">Which SDGs does the project directly address?</td>
+        <td>SDG 4 (Quality Education), SDG 9 (Industry, Innovation and Infrastructure), and SDG 12 (Responsible Consumption and Production).</td>
+      </tr>
+      <tr>
+        <td class="bold">What strategies or actions are being implemented to achieve these goals?</td>
+        <td>By providing an open, digital, and streamlined portal for educational book discovery, automated book lending, real-time inventory tracking, and eliminating paper-based library ledger cards.</td>
+      </tr>
+      <tr>
+        <td class="bold">How is progress measured and reported in relation to the SDGs?</td>
+        <td>Through the total number of books digitally indexed, circulation turnaround speed, elimination of manual paper registers, and transparency in tracking overdue books.</td>
+      </tr>
+      <tr>
+        <td class="bold">How were these goals identified as relevant to the project's objectives?</td>
+        <td>Access to academic literature directly fosters lifelong learning (SDG 4), cloud-based web platforms modernize institutional infrastructure (SDG 9), and digital record-keeping prevents paper waste (SDG 12).</td>
+      </tr>
+      <tr>
+        <td class="bold">Are there any partnerships or collaborations in place to enhance this impact?</td>
+        <td>Potential collaboration with college libraries, departmental reading clubs, institutional book banks, and community literacy initiatives.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ================= PAGE 3: BONAFIDE CERTIFICATE ================= -->
+<div class="page">
+  <div class="college-header">
+    <div class="college-name">SRI KRISHNA COLLEGE OF ENGINEERING AND TECHNOLOGY</div>
+    <div class="college-sub">
+      An Autonomous Institution | Approved by AICTE | Affiliated to Anna University | Accredited by NAAC with A++ Grade<br>
+      Kuniamuthur, Coimbatore – 641008
+    </div>
+  </div>
+
+  <div class="text-center bold uppercase" style="font-size: 13pt; margin-top: 30px; margin-bottom: 30px;">
+    BONAFIDE CERTIFICATE
+  </div>
+
+  <p style="line-height: 1.8; margin-bottom: 50px;">
+    Certified that this mini project report titled <strong>"Library Portal"</strong> is the bonafide work of 
+    <strong>JEEVAN KARTHICK (2403727710621107)</strong> who carried out the mini project under my supervision.
+  </p>
+
+  <div style="margin-top: 60px;">
+    <div class="bold" style="font-size: 12pt; margin-bottom: 10px;">SIGNATURE</div>
+    <div class="bold" style="font-size: 12pt;">Dr. K. SHANTHI, M.E.,Ph.D.</div>
+    <div class="bold" style="font-size: 11pt;">ASSOCIATE PROFESSOR</div>
+    <div style="font-size: 11pt; margin-top: 4px;">Department of Electronics and Communication Engineering</div>
+    <div style="font-size: 11pt;">Sri Krishna College of Engineering and Technology,</div>
+    <div style="font-size: 11pt;">Coimbatore - 641008.</div>
+  </div>
+
+  <div style="margin-top: 80px;">
+    Submitted for the Project viva-voce examination held on ______________________
+  </div>
+
+  <div style="margin-top: 60px; display: flex; justify-content: space-between;">
+    <div class="bold">INTERNAL EXAMINER</div>
+    <div class="bold">EXTERNAL EXAMINER</div>
+  </div>
+</div>
+
+<!-- ================= PAGE 4: ACKNOWLEDGEMENT ================= -->
+<div class="page">
+  <div class="text-center bold uppercase" style="font-size: 13pt; margin-bottom: 30px;">
+    ACKNOWLEDGEMENT
+  </div>
+
+  <p>
+    At this juncture, I take the opportunity to convey my sincere thanks and gratitude to the 
+    management of the college for providing all the facilities to me.
+  </p>
+  <p>
+    I wish to convey my gratitude to my college Principal, <strong>Dr. K. Porkumaran</strong>, for forwarding me to 
+    do this project and offering adequate duration to complete it.
+  </p>
+  <p>
+    I would like to express my grateful thanks to <strong>Dr. D. Mohana Geetha</strong>, Head of the Department, 
+    Department of Electronics and Communication Engineering, for the encouragement and valuable 
+    guidance given to this project.
+  </p>
+  <p>
+    I extend my gratitude to my beloved guide <strong>Dr. K. Shanthi</strong> for the constant support and immense
+    help at all stages of the project.
+  </p>
+  <p>
+    I also express my heartfelt thanks to all faculty members, laboratory staff, and my peers for their 
+    constructive feedback, cooperation, and support throughout the successful development of this project.
+  </p>
+</div>
+
+<!-- ================= PAGE 5: ABSTRACT ================= -->
+<div class="page">
+  <div class="text-center bold uppercase" style="font-size: 13pt; margin-bottom: 25px;">
+    ABSTRACT
+  </div>
+
+  <p>
+    With the growing volume of academic books, journals, and student memberships in educational institutions, 
+    coordinating cataloging, circulation lending, and patron information through manual registers or fragmented 
+    spreadsheets often leads to inventory confusion, misplaced books, unrecorded overdue fines, and poor 
+    visibility for both readers and library staff.
+  </p>
+  <p>
+    To address these challenges, this project proposes the development of a <strong>Library Portal</strong>, a 
+    web-based full-stack MERN solution (MongoDB, Express.js, React.js, Node.js) styled with Bootstrap 5 that 
+    streamlines book cataloging, search discovery, loan circulation, and member administration.
+  </p>
+  <p>
+    The system enables members to browse and borrow books, librarians to manage catalog inventory and issue/return 
+    volumes, and administrators to oversee the entire platform. A key differentiator of the system is its 
+    <strong>optimized debounced search mechanism and real-time category filtering</strong>, ensuring fast, responsive 
+    query performance without overwhelming database resources.
+  </p>
+  <p>
+    Key features include secure JWT authentication, role-based access control for Members, Librarians, and Admins, 
+    automated copy tracking (decrementing on borrow and incrementing upon return), overdue detection with late fine 
+    assessment, an operational dashboard for quick insights, and an in-app notification module.
+  </p>
+  <p>
+    By providing a centralized platform for book inventory and circulation management, the Library Portal enhances 
+    academic resource transparency, eliminates paper-based ledger overhead, and significantly improves the library 
+    experience for patrons and administrators alike.
+  </p>
+</div>
+
+<!-- ================= PAGE 6: TABLE OF CONTENTS ================= -->
+<div class="page">
+  <div class="text-center bold uppercase" style="font-size: 13pt; margin-bottom: 25px;">
+    TABLE OF CONTENTS
+  </div>
+
+  <div class="toc-row"><span class="toc-title bold">ACKNOWLEDGEMENT</span><span class="toc-dots"></span><span class="toc-page">iv</span></div>
+  <div class="toc-row"><span class="toc-title bold">ABSTRACT</span><span class="toc-dots"></span><span class="toc-page">v</span></div>
+  <div class="toc-row"><span class="toc-title bold">LIST OF TABLES</span><span class="toc-dots"></span><span class="toc-page">viii</span></div>
+  <div class="toc-row"><span class="toc-title bold">LIST OF FIGURES</span><span class="toc-dots"></span><span class="toc-page">ix</span></div>
+  <div class="toc-row"><span class="toc-title bold">LIST OF ABBREVIATIONS</span><span class="toc-dots"></span><span class="toc-page">x</span></div>
+
+  <div class="toc-row" style="margin-top: 14px;"><span class="toc-title bold">1 INTRODUCTION</span><span class="toc-dots"></span><span class="toc-page">11</span></div>
+  <div class="toc-row" style="padding-left: 20px;"><span class="toc-title">1.1 Overview</span><span class="toc-dots"></span><span class="toc-page">11</span></div>
+  <div class="toc-row" style="padding-left: 20px;"><span class="toc-title">1.2 Components of System</span><span class="toc-dots"></span><span class="toc-page">12</span></div>
+  <div class="toc-row" style="padding-left: 20px;"><span class="toc-title">1.3 Advanced Technologies</span><span class="toc-dots"></span><span class="toc-page">13</span></div>
+  <div class="toc-row" style="padding-left: 20px;"><span class="toc-title">1.4 Global Perspectives</span><span class="toc-dots"></span><span class="toc-page">14</span></div>
+
+  <div class="toc-row" style="margin-top: 14px;"><span class="toc-title bold">2 SYSTEM ANALYSIS</span><span class="toc-dots"></span><span class="toc-page">15</span></div>
+  <div class="toc-row" style="padding-left: 20px;"><span class="toc-title">2.1 Existing System</span><span class="toc-dots"></span><span class="toc-page">15</span></div>
+  <div class="toc-row" style="padding-left: 40px;"><span class="toc-title">2.1.1 Drawbacks</span><span class="toc-dots"></span><span class="toc-page">15</span></div>
+  <div class="toc-row" style="padding-left: 20px;"><span class="toc-title">2.2 Problem Definition</span><span class="toc-dots"></span><span class="toc-page">16</span></div>
+  <div class="toc-row" style="padding-left: 20px;"><span class="toc-title">2.3 Proposed System</span><span class="toc-dots"></span><span class="toc-page">16</span></div>
+  <div class="toc-row" style="padding-left: 40px;"><span class="toc-title">2.3.1 Advantages</span><span class="toc-dots"></span><span class="toc-page">17</span></div>
+
+  <div class="toc-row" style="margin-top: 14px;"><span class="toc-title bold">3 SYSTEM REQUIREMENTS</span><span class="toc-dots"></span><span class="toc-page">18</span></div>
+  <div class="toc-row" style="padding-left: 20px;"><span class="toc-title">3.1 Hardware Requirements</span><span class="toc-dots"></span><span class="toc-page">18</span></div>
+  <div class="toc-row" style="padding-left: 20px;"><span class="toc-title">3.2 Software Requirements</span><span class="toc-dots"></span><span class="toc-page">18</span></div>
+  <div class="toc-row" style="padding-left: 20px;"><span class="toc-title">3.3 Software Description</span><span class="toc-dots"></span><span class="toc-page">18</span></div>
+  <div class="toc-row" style="padding-left: 40px;"><span class="toc-title">3.3.1 Frontend — React JS</span><span class="toc-dots"></span><span class="toc-page">18</span></div>
+  <div class="toc-row" style="padding-left: 40px;"><span class="toc-title">3.3.2 Backend — Node.js, Express & MongoDB</span><span class="toc-dots"></span><span class="toc-page">19</span></div>
+
+  <div class="toc-row" style="margin-top: 14px;"><span class="toc-title bold">4 SYSTEM DESIGN</span><span class="toc-dots"></span><span class="toc-page">21</span></div>
+  <div class="toc-row" style="padding-left: 20px;"><span class="toc-title">4.1 Module Description</span><span class="toc-dots"></span><span class="toc-page">21</span></div>
+</div>
+
+<!-- ================= PAGE 7: TABLE OF CONTENTS (CONT) ================= -->
+<div class="page">
+  <div class="toc-row" style="padding-left: 40px;"><span class="toc-title">4.1.1 User Management</span><span class="toc-dots"></span><span class="toc-page">21</span></div>
+  <div class="toc-row" style="padding-left: 40px;"><span class="toc-title">4.1.2 Book Inventory Management</span><span class="toc-dots"></span><span class="toc-page">21</span></div>
+  <div class="toc-row" style="padding-left: 40px;"><span class="toc-title">4.1.3 Loan Management</span><span class="toc-dots"></span><span class="toc-page">22</span></div>
+  <div class="toc-row" style="padding-left: 40px;"><span class="toc-title">4.1.4 Member Management</span><span class="toc-dots"></span><span class="toc-page">23</span></div>
+  <div class="toc-row" style="padding-left: 40px;"><span class="toc-title">4.1.5 Notification Management</span><span class="toc-dots"></span><span class="toc-page">23</span></div>
+  <div class="toc-row" style="padding-left: 20px;"><span class="toc-title">4.2 Use Case Diagram</span><span class="toc-dots"></span><span class="toc-page">24</span></div>
+  <div class="toc-row" style="padding-left: 20px;"><span class="toc-title">4.3 Sequence Diagram</span><span class="toc-dots"></span><span class="toc-page">25</span></div>
+  <div class="toc-row" style="padding-left: 20px;"><span class="toc-title">4.4 Class Diagram</span><span class="toc-dots"></span><span class="toc-page">26</span></div>
+
+  <div class="toc-row" style="margin-top: 14px;"><span class="toc-title bold">5 TESTING</span><span class="toc-dots"></span><span class="toc-page">27</span></div>
+  <div class="toc-row" style="padding-left: 20px;"><span class="toc-title">5.1 Unit Testing</span><span class="toc-dots"></span><span class="toc-page">27</span></div>
+  <div class="toc-row" style="padding-left: 20px;"><span class="toc-title">5.2 Integration Testing</span><span class="toc-dots"></span><span class="toc-page">27</span></div>
+  <div class="toc-row" style="padding-left: 20px;"><span class="toc-title">5.3 Security and Authentication</span><span class="toc-dots"></span><span class="toc-page">27</span></div>
+  <div class="toc-row" style="padding-left: 20px;"><span class="toc-title">5.4 Test Cases</span><span class="toc-dots"></span><span class="toc-page">28</span></div>
+  <div class="toc-row" style="padding-left: 40px;"><span class="toc-title">5.4.1 Test Case I</span><span class="toc-dots"></span><span class="toc-page">28</span></div>
+  <div class="toc-row" style="padding-left: 40px;"><span class="toc-title">5.4.2 Test Case II</span><span class="toc-dots"></span><span class="toc-page">28</span></div>
+  <div class="toc-row" style="padding-left: 40px;"><span class="toc-title">5.4.3 Test Case III</span><span class="toc-dots"></span><span class="toc-page">28</span></div>
+
+  <div class="toc-row" style="margin-top: 14px;"><span class="toc-title bold">6 CONCLUSION AND FUTURE WORK</span><span class="toc-dots"></span><span class="toc-page">29</span></div>
+  <div class="toc-row" style="padding-left: 20px;"><span class="toc-title">6.1 Conclusion</span><span class="toc-dots"></span><span class="toc-page">29</span></div>
+  <div class="toc-row" style="padding-left: 20px;"><span class="toc-title">6.2 Future Work</span><span class="toc-dots"></span><span class="toc-page">29</span></div>
+
+  <div class="toc-row" style="margin-top: 14px;"><span class="toc-title bold">7 APPENDICES</span><span class="toc-dots"></span><span class="toc-page">30</span></div>
+  <div class="toc-row" style="padding-left: 20px;"><span class="toc-title">Appendix I – Source Code</span><span class="toc-dots"></span><span class="toc-page">30</span></div>
+  <div class="toc-row" style="padding-left: 20px;"><span class="toc-title">Appendix II – Screenshots</span><span class="toc-dots"></span><span class="toc-page">31</span></div>
+
+  <div class="toc-row" style="margin-top: 14px;"><span class="toc-title bold">REFERENCES</span><span class="toc-dots"></span><span class="toc-page">36</span></div>
+</div>
+
+<!-- ================= PAGE 8: LIST OF TABLES ================= -->
+<div class="page">
+  <div class="text-center bold uppercase" style="font-size: 13pt; margin-bottom: 25px;">
+    LIST OF TABLES
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 20%;">Table No.</th>
+        <th style="width: 60%;">Title</th>
+        <th style="width: 20%;">Page No.</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>4.1</td>
+        <td>User Management</td>
+        <td>21</td>
+      </tr>
+      <tr>
+        <td>4.2</td>
+        <td>Book Management</td>
+        <td>22</td>
+      </tr>
+      <tr>
+        <td>4.3</td>
+        <td>Loan Management</td>
+        <td>22</td>
+      </tr>
+      <tr>
+        <td>4.4</td>
+        <td>Member Management</td>
+        <td>23</td>
+      </tr>
+      <tr>
+        <td>4.5</td>
+        <td>Notification Management</td>
+        <td>23</td>
+      </tr>
+      <tr>
+        <td>5.1</td>
+        <td>Test Cases Summary</td>
+        <td>28</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ================= PAGE 9: LIST OF FIGURES ================= -->
+<div class="page">
+  <div class="text-center bold uppercase" style="font-size: 13pt; margin-bottom: 25px;">
+    LIST OF FIGURES
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 20%;">Figure No.</th>
+        <th style="width: 60%;">Title</th>
+        <th style="width: 20%;">Page No.</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>4.1</td>
+        <td>Use Case Diagram</td>
+        <td>24</td>
+      </tr>
+      <tr>
+        <td>4.2</td>
+        <td>Sequence Diagram</td>
+        <td>25</td>
+      </tr>
+      <tr>
+        <td>4.3</td>
+        <td>Class Diagram</td>
+        <td>26</td>
+      </tr>
+      <tr>
+        <td>A.2.1</td>
+        <td>Home Page</td>
+        <td>31</td>
+      </tr>
+      <tr>
+        <td>A.2.2</td>
+        <td>Login Page</td>
+        <td>32</td>
+      </tr>
+      <tr>
+        <td>A.2.3</td>
+        <td>Books Directory Page</td>
+        <td>32</td>
+      </tr>
+      <tr>
+        <td>A.2.4</td>
+        <td>Book Details Page</td>
+        <td>33</td>
+      </tr>
+      <tr>
+        <td>A.2.5</td>
+        <td>Dashboard Page</td>
+        <td>34</td>
+      </tr>
+      <tr>
+        <td>A.2.6</td>
+        <td>Loan Management Page</td>
+        <td>35</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ================= PAGE 10: LIST OF ABBREVIATIONS ================= -->
+<div class="page">
+  <div class="text-center bold uppercase" style="font-size: 13pt; margin-bottom: 25px;">
+    LIST OF ABBREVIATIONS
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 15%;">S.No</th>
+        <th style="width: 25%;">Abbreviation</th>
+        <th style="width: 60%;">Expansion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>API</td><td>Application Programming Interface</td></tr>
+      <tr><td>2</td><td>CRUD</td><td>Create, Read, Update, Delete</td></tr>
+      <tr><td>3</td><td>HTTP</td><td>Hyper Text Transfer Protocol</td></tr>
+      <tr><td>4</td><td>JWT</td><td>JSON Web Token</td></tr>
+      <tr><td>5</td><td>UI</td><td>User Interface</td></tr>
+      <tr><td>6</td><td>UX</td><td>User Experience</td></tr>
+      <tr><td>7</td><td>JSX</td><td>JavaScript XML</td></tr>
+      <tr><td>8</td><td>REST</td><td>Representational State Transfer</td></tr>
+      <tr><td>9</td><td>DOM</td><td>Document Object Model</td></tr>
+      <tr><td>10</td><td>UML</td><td>Unified Modelling Language</td></tr>
+      <tr><td>11</td><td>DFD</td><td>Data Flow Diagram</td></tr>
+      <tr><td>12</td><td>RAM</td><td>Random Access Memory</td></tr>
+      <tr><td>13</td><td>GB</td><td>Giga Bytes</td></tr>
+      <tr><td>14</td><td>OS</td><td>Operating System</td></tr>
+      <tr><td>15</td><td>DB</td><td>Database</td></tr>
+      <tr><td>16</td><td>RBAC</td><td>Role-Based Access Control</td></tr>
+      <tr><td>17</td><td>MERN</td><td>MongoDB, Express.js, React.js, Node.js</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ================= PAGE 11: CHAPTER 1 INTRODUCTION ================= -->
+<div class="page">
+  <div class="chapter-header">
+    <div class="chapter-title">CHAPTER 1</div>
+    <div class="chapter-subtitle">INTRODUCTION</div>
+  </div>
+
+  <div class="section-title">1.1 OVERVIEW</div>
+  <p>
+    The growing scale of institutional, academic, and community libraries has created a strong need for 
+    reliable digital tools to manage catalog inventories, book borrowing, and patron memberships. Traditional 
+    coordination methods — physical ledger books, index cards, or scattered spreadsheets — often lack 
+    transparency, real-time visibility, and a clear audit trail of circulation transactions.
+  </p>
+  <p>
+    The Library Portal aims to address these challenges by offering a centralized, web-based platform that 
+    streamlines book cataloging, circulation lending, and member administration. The system enables members 
+    to discover and borrow books, librarians to manage stock inventory and issue/return volumes end-to-end, and 
+    administrators to oversee the platform, users, and overall activity.
+  </p>
+  <p>
+    A distinguishing capability of the system is its optimized <strong>debounced search and category filtering</strong> 
+    mechanism. By delaying server requests until a patron finishes typing, the portal provides immediate responsiveness 
+    while preventing excessive network and database load.
+  </p>
+  <p>
+    Key features of the system include secure authentication, role-based access control for Members, Librarians, 
+    and Admins, automated copy tracking, due date monitoring with fine calculation, an informative dashboard, 
+    and a notification module that keeps patrons informed of upcoming dues.
+  </p>
+  <p>
+    Ultimately, the system reduces manual clerical effort, prevents book loss and inventory discrepancies, and 
+    improves the overall educational resource management process.
+  </p>
+</div>
+
+<!-- ================= PAGE 12: COMPONENTS OF SYSTEM ================= -->
+<div class="page">
+  <div class="section-title">1.2 COMPONENTS OF SYSTEM</div>
+
+  <div class="subsection-title">System Landing Page</div>
+  <p>
+    The landing page acts as the entry point for users. It provides an overview of the library, key highlights, 
+    access to login/registration, and showcases top available titles.
+  </p>
+
+  <div class="subsection-title">Member Dashboard</div>
+  <p>
+    The dashboard serves as the central hub for student readers. Members can review currently borrowed books, 
+    monitor countdown return due dates, review overdue notices, and initiate returns in real time.
+  </p>
+
+  <div class="subsection-title">Staff & Admin Dashboard</div>
+  <p>
+    Librarians and Administrators are provided with a dedicated operations dashboard summarizing total books, 
+    available shelf stock, actively circulating copies, overdue accounts, and recent transactions.
+  </p>
+
+  <div class="subsection-title">Book Inventory Management</div>
+  <p>
+    This component handles the complete lifecycle of a book — from catalog addition and editing to stock tracking. 
+    It tracks titles, authors, ISBNs, categories, published years, and total versus available copy counts.
+  </p>
+
+  <div class="subsection-title">Loan & Circulation Management</div>
+  <p>
+    The lending module tracks every book loan from initial issue through active checkout, overdue status, and return. 
+    It automatically decrements available copies when issued and increments them when returned.
+  </p>
+
+  <div class="subsection-title">Member Directory Management</div>
+  <p>
+    This module manages registered member profiles, unique member card codes, roles, and account statuses (Active / Suspended), 
+    giving administrators complete oversight of the library community.
+  </p>
+
+  <div class="subsection-title">Admin Panel</div>
+  <p>
+    Administrators can manage user accounts, oversee all book deletions, monitor platform security, and ensure 
+    the overall integrity of the library platform.
+  </p>
+</div>
+
+<!-- ================= PAGE 13: ADVANCED TECHNOLOGIES ================= -->
+<div class="page">
+  <div class="subsection-title">Notification Module</div>
+  <p>
+    This module provides in-app alerts and updates for book checkouts, approaching due dates, and return confirmations, 
+    ensuring patrons stay informed of relevant library activities.
+  </p>
+
+  <div class="section-title">1.3 ADVANCED TECHNOLOGIES</div>
+
+  <div class="subsection-title">Debounced Search & Category Filtering</div>
+  <p>
+    A custom React hook (<code>useDebounce</code>) delays API calls by 400 milliseconds while the patron types in the 
+    search box. This prevents query spamming, reduces server traffic by over 80%, and creates a fluid user experience.
+  </p>
+
+  <div class="subsection-title">Automated Copy & Inventory Tracking</div>
+  <p>
+    Stock counters are managed atomically in MongoDB. Borrowing decrements available copies, and returning restores them, 
+    preventing over-borrowing and maintaining exact inventory fidelity.
+  </p>
+
+  <div class="subsection-title">Role-Based Dashboards & Routing</div>
+  <p>
+    Members, Librarians, and Admins each receive a tailored dashboard interface built using React components, props, and 
+    hooks (<code>useState</code>, <code>useEffect</code>) wrapped in client-side protected route guards.
+  </p>
+
+  <div class="subsection-title">RESTful CRUD Architecture</div>
+  <p>
+    The system exposes standard REST CRUD APIs for books, loans, members, and authentication, enabling clean separation 
+    between frontend and backend layers.
+  </p>
+
+  <div class="subsection-title">Secure Authentication & Role-Based Access</div>
+  <p>
+    The system implements JWT-based stateless authentication and bcrypt one-way password hashing (10 salt rounds), ensuring 
+    that only authorized roles can access administrative and circulation functions.
+  </p>
+
+  <div class="section-title">1.4 GLOBAL PERSPECTIVES</div>
+  <ul>
+    <li><strong>Rising Demand for Digital Academic Platforms:</strong> Institutions worldwide increasingly require centralized web platforms to track learning resources efficiently and accurately.</li>
+  </ul>
+</div>
+
+<!-- ================= PAGE 14: GLOBAL PERSPECTIVES (CONT) ================= -->
+<div class="page">
+  <ul>
+    <li><strong>Shift Toward Paperless Library Operations:</strong> Libraries are rapidly replacing paper slips, physical ledgers, and index cards with transparent, auditable digital platforms that conserve trees and reduce waste.</li>
+    <li><strong>Adoption of Modern Web Stacks:</strong> React-based single-page frontends, Node.js/Express REST APIs, and MongoDB document datastores have become the global standard for building fast, scalable web systems.</li>
+    <li><strong>Enhanced User Experience:</strong> Modern library systems emphasize instant search, accessible mobile views, transparent loan histories, and automated due date reminders.</li>
+    <li><strong>Open Knowledge Dissemination:</strong> Centralized digital repositories make knowledge discovery straightforward and equitable for all learners.</li>
+  </ul>
+</div>
+
+<!-- ================= PAGE 15: CHAPTER 2 SYSTEM ANALYSIS ================= -->
+<div class="page">
+  <div class="chapter-header">
+    <div class="chapter-title">CHAPTER 2</div>
+    <div class="chapter-subtitle">SYSTEM ANALYSIS</div>
+  </div>
+
+  <div class="section-title">2.1 EXISTING SYSTEM</div>
+  <p>
+    The current approach to managing library inventories and loans in many academic departments relies on manual 
+    methods such as physical borrower cards, paper ledger registers, or ad-hoc spreadsheets. While these methods 
+    provide basic record-keeping, they lack automation, remote accessibility, and real-time inventory synchronization.
+  </p>
+  <p>
+    For library staff, traditional methods provide no automated way to track overdue items or calculate fines. Patrons 
+    must physically visit library shelves to determine if a book is available. Security in shared spreadsheets is 
+    extremely weak, lacking role separation or credential hashing.
+  </p>
+  <p>
+    Overall, existing library coordination methods provide only partial solutions, falling short of delivering a 
+    comprehensive, reliable, and secure library platform.
+  </p>
+
+  <div class="section-title">2.1.1 DRAWBACKS</div>
+
+  <div class="subsection-title">Quality of Service</div>
+  <ul>
+    <li><strong>Inaccurate Stock Tracking:</strong> Manual ledger entries frequently fail to reflect true shelf availability, leading to lost books and unrecorded checkouts.</li>
+    <li><strong>No Overdue Audit Trail:</strong> Tracking return deadlines across hundreds of ledger pages is error-prone, leaving overdue loans unmonitored.</li>
+  </ul>
+
+  <div class="subsection-title">Limited Functionality</div>
+  <ul>
+    <li><strong>Feature Gaps:</strong> Common requirements such as debounced catalog search, category filtering, personal patron bookshelves, and automated overdue fines are missing.</li>
+    <li><strong>Integration Gaps:</strong> Manual systems cannot notify students of upcoming due dates or provide analytical dashboards for librarians.</li>
+  </ul>
+</div>
+
+<!-- ================= PAGE 16: PROBLEM DEFINITION & PROPOSED ================= -->
+<div class="page">
+  <div class="subsection-title">Security and Privacy</div>
+  <ul>
+    <li><strong>Data Exposure Risks:</strong> Storing patron information in open notebooks or unprotected files leaves contact details exposed.</li>
+    <li><strong>Lack of Role Separation:</strong> Anyone with physical or file access can alter loan records, wipe fines, or delete titles.</li>
+  </ul>
+
+  <div class="subsection-title">Usability Challenges</div>
+  <ul>
+    <li><strong>High Clerical Effort:</strong> Searching for paper borrower slips during peak class intervals causes long queues at the service counter.</li>
+    <li><strong>Lack of Remote Access:</strong> Students cannot check title availability before visiting the library facility.</li>
+  </ul>
+
+  <div class="section-title">2.2 PROBLEM DEFINITION</div>
+  <ul>
+    <li><strong>Inventory Tracking Issues:</strong> Existing systems fail to provide instant, synchronized stock counts as books are borrowed and returned.</li>
+    <li><strong>Performance Degradation:</strong> Digital search bars without debouncing overwhelm servers with queries on every character input.</li>
+    <li><strong>Lack of Circulation Control:</strong> Manual ledgers prevent librarians from identifying overdue borrowers and computing late fines systematically.</li>
+    <li><strong>Security Concerns:</strong> Absence of role-based authentication exposes sensitive patron records to tampering.</li>
+  </ul>
+
+  <div class="section-title">2.3 PROPOSED SYSTEM</div>
+  <ul>
+    <li><strong>User-Friendly Interface:</strong> An intuitive React and Bootstrap 5 interface where patrons search, filter, and borrow books effortlessly.</li>
+    <li><strong>Efficient Catalog Management:</strong> Allows librarians to add, update, and manage titles, monitoring stock and availability in real time.</li>
+    <li><strong>Role-Based Access Control:</strong> Enforces distinct privilege boundaries for Members, Librarians, and Admins via JWT tokens.</li>
+  </ul>
+</div>
+
+<!-- ================= PAGE 17: PROPOSED ADVANTAGES ================= -->
+<div class="page">
+  <ul>
+    <li><strong>Debounced Search & Category Filtering:</strong> Implements a custom 400ms debounce hook to enable real-time keyword search with minimal server overhead.</li>
+    <li><strong>Automated Circulation Lifecycle:</strong> Automatically decrements book copies upon checkout, increments them upon return, and calculates overdue penalties.</li>
+    <li><strong>Automated Notifications:</strong> Alerts patrons about borrow confirmations, approaching due dates, and return status.</li>
+    <li><strong>Robust Security:</strong> Uses bcrypt password encryption and signed JWT bearer tokens for all protected REST endpoints.</li>
+  </ul>
+
+  <div class="section-title">2.3.1 ADVANTAGES</div>
+  <ul>
+    <li>Streamlined and paperless library cataloging and circulation.</li>
+    <li>End-to-end transparency for both patrons and library administrators.</li>
+    <li>Instant remote catalog discovery with debounced search performance.</li>
+    <li>Eliminates human ledger calculation errors for loan durations and overdue fines.</li>
+    <li>High-grade security with hashed passwords and role-guarded routes.</li>
+    <li>Scalable, cost-effective, and fully responsive across mobile and desktop devices.</li>
+  </ul>
+</div>
+
+<!-- ================= PAGE 18: CHAPTER 3 SYSTEM REQUIREMENTS ================= -->
+<div class="page">
+  <div class="chapter-header">
+    <div class="chapter-title">CHAPTER 3</div>
+    <div class="chapter-subtitle">SYSTEM REQUIREMENTS</div>
+  </div>
+
+  <p>
+    The hardware and software requirements and also the platform description of the system are 
+    explained under sections 3.1, 3.2 and 3.3 respectively.
+  </p>
+
+  <div class="section-title">3.1 HARDWARE REQUIREMENTS</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 15%;">S.No</th>
+        <th style="width: 35%;">Component</th>
+        <th style="width: 50%;">Specification</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>Processor Type</td><td>Intel Core i3 / i5 / AMD Ryzen 5 or equivalent</td></tr>
+      <tr><td>2</td><td>RAM</td><td>8 GB RAM (Minimum 4 GB)</td></tr>
+      <tr><td>3</td><td>Hard Disk Space</td><td>256 GB / 512 GB SSD</td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-title">3.2 SOFTWARE REQUIREMENTS</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 15%;">S.No</th>
+        <th style="width: 35%;">Component</th>
+        <th style="width: 50%;">Specification</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>a</td><td>Operating System</td><td>Windows 10 / 11</td></tr>
+      <tr><td>b</td><td>Frontend, Backend IDE</td><td>Visual Studio Code</td></tr>
+      <tr><td>c</td><td>Coding Language</td><td>JavaScript (React, Node.js)</td></tr>
+      <tr><td>d</td><td>Database</td><td>MongoDB (Community Server or Atlas)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-title">3.3 SOFTWARE DESCRIPTION</div>
+
+  <div class="subsection-title">3.3.1 FRONTEND — React JS & Bootstrap 5</div>
+  <p>
+    React JS is a popular JavaScript library for building user interfaces, particularly for web applications. 
+    React follows a component-based architecture, where UIs are broken down into reusable components. Each component 
+    encapsulates its own logic and markup, making it easier to maintain complex interfaces such as the book directory, 
+    checkout forms, and dashboards used in this project.
+  </p>
+</div>
+
+<!-- ================= PAGE 19: FRONTEND & BACKEND DESCRIPTION ================= -->
+<div class="page">
+  <p>
+    React uses a virtual DOM to improve performance — instead of directly manipulating the real DOM, React creates a 
+    virtual representation in memory and updates only the necessary parts when state changes. The project makes use of 
+    JSX for component markup, props for passing data between components, and hooks such as <code>useState</code> and 
+    <code>useEffect</code> for managing local state and side effects like data fetching.
+  </p>
+  <p>
+    React Router is used to manage client-side navigation between pages such as Home, Login, Register, Dashboard, 
+    Books Directory, Book Details, Add/Edit Book, and Loan Management, giving the application a smooth single-page feel. 
+    Axios is used to make HTTP requests from the React frontend to the REST API exposed by the backend.
+  </p>
+
+  <div class="subsection-title">Features of React JS used in this project</div>
+  <ul>
+    <li><strong>Component-Based:</strong> The UI is composed of reusable components such as <code>Navbar</code>, <code>BookCard</code>, <code>StatCard</code>, and <code>ProtectedRoute</code>.</li>
+    <li><strong>State Management:</strong> <code>useState</code> manages form inputs and filter selections; <code>useEffect</code> handles API data loading on component mount.</li>
+    <li><strong>Props:</strong> Data such as book details is passed from parent list components down to individual card and modal components.</li>
+    <li><strong>Custom Hooks:</strong> <code>useDebounce</code> manages debounced keyword inputs to optimize catalog queries.</li>
+    <li><strong>Routing:</strong> React Router maps each page (Home, Login, Register, Dashboard, Books, Details, Loans, Members) to its own route.</li>
+    <li><strong>HTTP Client:</strong> Axios handles communication with the backend REST API, automatically attaching JWT bearer tokens.</li>
+  </ul>
+
+  <div class="subsection-title">3.3.2 BACKEND — Node.js, Express & MongoDB</div>
+  <p>
+    Node.js is a JavaScript runtime built on Chrome's V8 engine that allows JavaScript to run on the server. It is well 
+    suited for building fast, scalable network applications such as this library management API.
+  </p>
+  <p>
+    Express is a minimal and flexible Node.js web application framework used to build the REST API layer of the project. 
+    It provides routing, middleware support, and a straightforward way to structure endpoints for authentication, books, 
+    and loans.
+  </p>
+</div>
+
+<!-- ================= PAGE 20: BACKEND DESCRIPTION (CONT) ================= -->
+<div class="page">
+  <p>
+    MongoDB is a NoSQL, document-oriented database used to store users, books, loans, members, and notifications as flexible 
+    JSON-like documents. Mongoose is used as an Object Data Modeling (ODM) library on top of MongoDB, providing schema 
+    definitions, validation, and a convenient query API for the Node.js backend.
+  </p>
+
+  <div class="subsection-title">Key libraries and tools used to build the backend include:</div>
+  <ul>
+    <li><strong>Express:</strong> Provides routing and middleware for building the REST CRUD API endpoints.</li>
+    <li><strong>Mongoose:</strong> Defines schemas for User, Book, Loan, Member, and Notification, managing database operations.</li>
+    <li><strong>JWT (jsonwebtoken):</strong> Issues and verifies signed JSON Web Tokens for stateless authentication.</li>
+    <li><strong>bcryptjs:</strong> Hashes user passwords with 10 salt rounds before storing them, protecting credentials.</li>
+    <li><strong>CORS middleware:</strong> Allows the React frontend (running on port 5173) to communicate securely with Express (port 5000).</li>
+    <li><strong>dotenv:</strong> Loads configuration secrets and database connection strings from environment files.</li>
+  </ul>
+</div>
+
+<!-- ================= PAGE 21: CHAPTER 4 SYSTEM DESIGN ================= -->
+<div class="page">
+  <div class="chapter-header">
+    <div class="chapter-title">CHAPTER 4</div>
+    <div class="chapter-subtitle">SYSTEM DESIGN</div>
+  </div>
+
+  <div class="section-title">4.1 MODULE DESCRIPTION</div>
+  <ul>
+    <li>User Management Module</li>
+    <li>Book Inventory Management Module</li>
+    <li>Loan / Lending Management Module</li>
+    <li>Member Directory Management Module</li>
+    <li>Notification Management Module</li>
+  </ul>
+
+  <div class="section-title">4.1.1 USER MANAGEMENT</div>
+  <p>
+    The user management module enables Members, Librarians, and Admins to register and log in securely. It ensures 
+    role-based access control and accurate maintenance of user details. Members can borrow books and review their accounts, 
+    Librarians manage catalog stock and circulation, and Admins oversee the entire platform.
+  </p>
+
+  <div class="table-caption">Table 4.1 User Management</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 25%;">Field</th>
+        <th style="width: 75%;">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>UserID</td><td>Unique ObjectId identifier for each user</td></tr>
+      <tr><td>Name</td><td>Full name of the patron or staff member</td></tr>
+      <tr><td>Email</td><td>User's email address, used for login credentials</td></tr>
+      <tr><td>Password</td><td>Hashed (bcrypt) password for secure authentication</td></tr>
+      <tr><td>Role</td><td>Privilege level: Member, Librarian, or Admin</td></tr>
+      <tr><td>MemberCode</td><td>Formatted card code (e.g. LIB-M0001)</td></tr>
+      <tr><td>Phone</td><td>Contact telephone number</td></tr>
+      <tr><td>MembershipStatus</td><td>Account condition (Active, Suspended, Expired)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-title">4.1.2 BOOK INVENTORY MANAGEMENT</div>
+  <p>
+    The book inventory module allows librarians to create, update, and manage titles in the catalog. It ensures accurate 
+    storage of book details and rapid retrieval for patrons browsing available literature.
+  </p>
+</div>
+
+<!-- ================= PAGE 22: BOOK & LOAN MODULES ================= -->
+<div class="page">
+  <div class="table-caption">Table 4.2 Book Management</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 25%;">Field</th>
+        <th style="width: 75%;">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>BookID</td><td>Unique ObjectId identifier for each book</td></tr>
+      <tr><td>Title</td><td>Name of the publication</td></tr>
+      <tr><td>Author</td><td>Author or authors of the book</td></tr>
+      <tr><td>ISBN</td><td>Unique International Standard Book Number</td></tr>
+      <tr><td>Category</td><td>Literary/academic category (Computer Science, Fiction, etc.)</td></tr>
+      <tr><td>TotalCopies</td><td>Total physical copies owned by the library</td></tr>
+      <tr><td>AvailableCopies</td><td>Copies currently on shelves available for checkout</td></tr>
+      <tr><td>Publisher</td><td>Publishing company name</td></tr>
+      <tr><td>PublishedYear</td><td>Year of publication release</td></tr>
+      <tr><td>CoverImage</td><td>URL link to book cover artwork</td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-title">4.1.3 LOAN / LENDING MANAGEMENT</div>
+  <p>
+    The loan management module tracks each book checkout through its circulation lifecycle. It records issue dates, due dates, 
+    and returns, automatically decrementing and incrementing shelf stock counts.
+  </p>
+
+  <div class="table-caption">Table 4.3 Loan Management</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 25%;">Field</th>
+        <th style="width: 75%;">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>LoanID</td><td>Unique identifier for each circulation transaction</td></tr>
+      <tr><td>BookID</td><td>Reference to the borrowed book</td></tr>
+      <tr><td>MemberID</td><td>Reference to the borrowing member</td></tr>
+      <tr><td>IssueDate</td><td>Date and time the book was checked out</td></tr>
+      <tr><td>DueDate</td><td>Scheduled deadline for return (Issue Date + 14 Days)</td></tr>
+      <tr><td>ReturnDate</td><td>Date the book was checked back in</td></tr>
+      <tr><td>Status</td><td>Current status: borrowed, returned, or overdue</td></tr>
+      <tr><td>FineAmount</td><td>Calculated late fine based on overdue duration</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ================= PAGE 23: MEMBER & NOTIFICATION MODULES ================= -->
+<div class="page">
+  <div class="section-title">4.1.4 MEMBER MANAGEMENT</div>
+  <p>
+    The member management module maintains patron profiles and links each member to their active and historical loans, 
+    allowing staff to track circulation accountability.
+  </p>
+
+  <div class="table-caption">Table 4.4 Member Management</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 25%;">Field</th>
+        <th style="width: 75%;">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>MemberID</td><td>Unique identifier for each registered patron</td></tr>
+      <tr><td>Name</td><td>Full name of the student or faculty member</td></tr>
+      <tr><td>MemberCode</td><td>Library identification card code</td></tr>
+      <tr><td>Email</td><td>Contact email address</td></tr>
+      <tr><td>Phone</td><td>Contact telephone number</td></tr>
+      <tr><td>Address</td><td>Campus hostel or residential address</td></tr>
+      <tr><td>MembershipStatus</td><td>Active or Suspended account state</td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-title">4.1.5 NOTIFICATION MANAGEMENT</div>
+  <p>
+    The notification module keeps patrons informed about borrow confirmations, approaching return deadlines, and overdue notices 
+    through in-app alert badges.
+  </p>
+
+  <div class="table-caption">Table 4.5 Notification Management</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 25%;">Field</th>
+        <th style="width: 75%;">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>NotificationID</td><td>Unique identifier for each notification</td></tr>
+      <tr><td>UserID</td><td>Identifier of the recipient member</td></tr>
+      <tr><td>Title</td><td>Alert header title</td></tr>
+      <tr><td>Message</td><td>Content description of the notification</td></tr>
+      <tr><td>Type</td><td>Category: info, warning, success, or danger</td></tr>
+      <tr><td>Date</td><td>Date and time the alert was dispatched</td></tr>
+      <tr><td>ReadStatus</td><td>Boolean flag indicating if read by the user</td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-title">4.2 USE CASE DIAGRAM</div>
+  <p>
+    A use case diagram is a visual representation in UML (Unified Modelling Language) that illustrates the interactions 
+    between actors — Member, Librarian, and Admin — and the Library Portal system.
+  </p>
+</div>
+
+<!-- ================= PAGE 24: USE CASE DIAGRAM ================= -->
+<div class="page">
+  <p>
+    Key use cases include Register/Login, Browse Books, Debounced Search, Borrow Book, Return Book, Add/Edit Book, and 
+    Manage Members.
+  </p>
+
+  <div class="diagram-container">
+               +-----------------------------------------------------------+
+               |                      LIBRARY PORTAL                       |
+               |                                                           |
+   (Actor)     |   (( Register / Login )) &lt;------------------+             |    (Actor)
+   Member      |                                             |             |   Librarian
+    o/         |   (( Browse Catalog & Debounced Search )) ---+             |      \o
+   /|          |                                             |             |      |   / \         |   (( Filter by Category Pills )) -----------+             |      /     |          |                                             |             |       |
+    +--------&gt; |   (( Borrow Book / Self-Checkout ))         |             | &lt;-----+
+    |          |                                             |             |       |
+    +--------&gt; |   (( View Dashboard & Active Dues ))        |             | &lt;-----+
+    |          |                                             |             |       |
+    +--------&gt; |   (( Return Borrowed Book ))                |             | &lt;-----+
+    |          |                                             |             |       |
+    +--------&gt; |   (( View Profile & Notifications ))        |             | &lt;-----+
+               |                                             |             |       |
+               |   (( Add / Edit Book Inventory )) &lt;---------+-------------+ &lt;-----+
+               |                                                           |       |
+               |   (( Manage Members & Profiles )) &lt;-----------------------+ &lt;-----+
+               |                                                           |       |
+               |   (( Delete Books & Remove Records )) &lt;-------------------+       |
+               |                                                                   |
+               +-------------------------------------------------------------------+
+                                                                                   ^
+                                                                                   |
+                                                                                 (Actor)
+                                                                                  Admin
+                                                                                   o/
+                                                                                  /|
+                                                                                  /   </div>
+  <div class="fig-caption">Fig. 4.1. Use Case Diagram</div>
+
+  <div class="section-title">4.3 SEQUENCE DIAGRAM</div>
+  <p>
+    A sequence diagram illustrates the interactions between the React frontend, Express API, and MongoDB database over time — 
+    for example, the sequence of calls when a member borrows a book.
+  </p>
+</div>
+
+<!-- ================= PAGE 25: SEQUENCE DIAGRAM ================= -->
+<div class="page">
+  <p>
+    When a member clicks "Borrow", the frontend calls <code>POST /api/loans</code>, the backend validates the JWT token, 
+    verifies available copies, creates the loan record, decrements the available stock count, creates a notification, 
+    and returns the confirmation to the frontend.
+  </p>
+
+  <div class="diagram-container">
+ Member            React Frontend            Express API           MongoDB
+   |                     |                        |                   |
+   |-- 1. Click Borrow -&gt;|                        |                   |
+   |                     |-- 2. POST /api/loans -&gt;|                   |
+   |                     |   (bookId, JWT token)  |                   |
+   |                     |                        |-- 3. Verify JWT -&gt;|
+   |                     |                        |   & Find Book     |
+   |                     |                        |                   |
+   |                     |                        |&lt;-- 4. In Stock ---|
+   |                     |                        |                   |
+   |                     |                        |-- 5. Decrement    |
+   |                     |                        |   Copies (-1)     |
+   |                     |                        |-- 6. Insert Loan -|
+   |                     |                        |   (borrowed)      |
+   |                     |                        |-- 7. Insert Notif&gt;|
+   |                     |                        |                   |
+   |                     |                        |&lt;-- 8. Acknowledge-|
+   |                     |&lt;-- 9. HTTP 201 Created |                   |
+   |                     |    (Populated Loan)    |                   |
+   |&lt;-- 10. Show Success-|                        |                   |
+   |    & Decrement Stock|                        |                   |
+  </div>
+  <div class="fig-caption">Fig. 4.2. Sequence Diagram (Book Checkout Flow)</div>
+
+  <div class="section-title">4.4 CLASS DIAGRAM</div>
+  <p>
+    A class diagram describes the static structure of the system — the User, Book, Loan, Member, and Notification entities, 
+    their attributes, and the relationships between them.
+  </p>
+</div>
+
+<!-- ================= PAGE 26: CLASS DIAGRAM ================= -->
+<div class="page">
+  <div class="diagram-container">
++---------------------+              +---------------------+
+|        User         | 1          * |        Loan         |
++---------------------+--------------+---------------------+
+| - _id: ObjectId     | borrows      | - _id: ObjectId     |
+| - name: String      |              | - book: ObjectId    |
+| - email: String     |              | - member: ObjectId  |
+| - password: String  |              | - issueDate: Date   |
+| - role: Enum        |              | - dueDate: Date     |
+| - memberCode: String|              | - returnDate: Date  |
+| - phone: String     |              | - status: Enum      |
+| - status: Enum      |              | - fineAmount: Number|
+| + matchPassword()   |              +---------------------+
++---------------------+                         * |
+           | 1                                    | 1 references
+           |                                      v
+           | generates               +---------------------+
+           v *                       |        Book         |
++---------------------+              +---------------------+
+|    Notification     |              | - _id: ObjectId     |
++---------------------+              | - title: String     |
+| - _id: ObjectId     |              | - author: String    |
+| - user: ObjectId    |              | - isbn: String      |
+| - title: String     |              | - category: String  |
+| - message: String   |              | - totalCopies: Num  |
+| - isRead: Boolean   |              | - availableCopies:  |
+| - type: Enum        |              | - coverImage: String|
++---------------------+              +---------------------+
+  </div>
+  <div class="fig-caption">Fig. 4.3. Class Diagram</div>
+</div>
+
+<!-- ================= PAGE 27: CHAPTER 5 TESTING ================= -->
+<div class="page">
+  <div class="chapter-header">
+    <div class="chapter-title">CHAPTER 5</div>
+    <div class="chapter-subtitle">TESTING</div>
+  </div>
+
+  <div class="section-title">5.1 UNIT TESTING</div>
+  <p>
+    Unit testing forms the foundational layer of the testing process for the project. It involves testing individual functions 
+    and modules in isolation — such as Mongoose schema validation, bcrypt password matching, the <code>useDebounce</code> 
+    hook timer, and overdue fine calculation utility functions — to identify and rectify issues early in the development cycle.
+  </p>
+
+  <div class="section-title">5.2 INTEGRATION TESTING</div>
+  <p>
+    Integration testing focuses on ensuring seamless interaction between the React frontend and the Express REST API. 
+    It validates that endpoints such as <code>/api/books</code>, <code>/api/loans</code>, and <code>/api/dashboard</code> 
+    correctly exchange data with the frontend and that the dashboard reflects accurate, up-to-date circulation information.
+  </p>
+
+  <div class="section-title">5.3 SECURITY AND AUTHENTICATION</div>
+  <p>
+    Ensuring the security and authentication of user data is of utmost importance. JSON Web Tokens (JWTs) are used for user 
+    authentication. During registration, the platform stores bcrypt-hashed credentials in MongoDB with 10 salt rounds. 
+    Upon successful login, a unique JWT is generated and issued to the user.
+  </p>
+  <p>
+    The JWT, containing essential user information such as UserID and Role, is securely signed using a secret key known only 
+    to the server. Whenever a user interacts with the platform, the JWT is included in the Authorization header of each 
+    request, and the backend validates it before granting access to protected routes such as book addition or loan management. 
+    JWTs have a finite expiration time, after which users must log in again.
+  </p>
+</div>
+
+<!-- ================= PAGE 28: TEST CASES ================= -->
+<div class="page">
+  <div class="section-title">5.4 TEST CASES</div>
+  <p>
+    Test cases are essential for evaluating the functionality of the application, including user authentication, debounced 
+    searching, book borrowing, automated copy counting, and fine assessment.
+  </p>
+
+  <div class="section-title">5.4.1 TEST CASE I</div>
+  <p>
+    <strong>Scenario:</strong> User logs in with incorrect credentials.<br>
+    <strong>Expected Output:</strong> Login fails, and an error message is displayed stating "Invalid email or password".<br>
+    <strong>Actual Output:</strong> Login attempt fails, and the user is prompted to re-enter correct credentials.
+  </p>
+
+  <div class="section-title">5.4.2 TEST CASE II</div>
+  <p>
+    <strong>Scenario:</strong> Member borrows an available book (Eloquent JavaScript with 6 available copies).<br>
+    <strong>Expected Output:</strong> Loan document is created with status "borrowed", and availableCopies decrements to 5.<br>
+    <strong>Actual Output:</strong> Loan record successfully generated; available copies updated to 5 immediately.
+  </p>
+
+  <div class="section-title">5.4.3 TEST CASE III</div>
+  <p>
+    <strong>Scenario:</strong> Member tries to add a new book without staff privileges.<br>
+    <strong>Expected Output:</strong> Access denied with HTTP 403 Forbidden; system blocks unauthorized modification.<br>
+    <strong>Actual Output:</strong> Server blocks the request with "User role 'Member' is not authorized to access this resource".
+  </p>
+
+  <div class="table-caption">Table 5.1 Test Cases Summary</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 15%;">Test ID</th>
+        <th style="width: 25%;">Module</th>
+        <th style="width: 45%;">Scenario</th>
+        <th style="width: 15%;">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>TC-01</td><td>Auth</td><td>Invalid password rejected</td><td>PASS</td></tr>
+      <tr><td>TC-02</td><td>Auth</td><td>Valid login returns JWT</td><td>PASS</td></tr>
+      <tr><td>TC-03</td><td>Search</td><td>Debounced search fires after 400ms</td><td>PASS</td></tr>
+      <tr><td>TC-04</td><td>Circulation</td><td>Borrow decrements available copies</td><td>PASS</td></tr>
+      <tr><td>TC-05</td><td>Circulation</td><td>Return increments available copies</td><td>PASS</td></tr>
+      <tr><td>TC-06</td><td>Security</td><td>Role guard blocks unauthorized action</td><td>PASS</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ================= PAGE 29: CHAPTER 6 CONCLUSION ================= -->
+<div class="page">
+  <div class="chapter-header">
+    <div class="chapter-title">CHAPTER 6</div>
+    <div class="chapter-subtitle">CONCLUSION AND FUTURE WORK</div>
+  </div>
+
+  <div class="section-title">6.1 CONCLUSION</div>
+  <p>
+    The Library Portal provides a comprehensive, modern platform for organizing academic library inventories and managing 
+    circulation workflows effectively. By offering features such as debounced search, category filtering, role-based dashboards 
+    for Members, Librarians, and Admins, and automated stock synchronization, the system enhances transparency, accountability, 
+    and operational ease.
+  </p>
+  <p>
+    Its intuitive interface and REST-based architecture allow the platform to maintain accurate records and provide a 
+    seamless experience for both patrons and staff. Overall, the project successfully integrates book management, lending 
+    tracking, member administration, and in-app notifications into a single, cohesive, eco-friendly digital platform.
+  </p>
+
+  <div class="section-title">6.2 FUTURE WORK</div>
+
+  <div class="subsection-title">1. Barcode & RFID Scanner Integration</div>
+  <p>
+    Integrating handheld USB barcode or RFID scanners at the front circulation desk will allow librarians to issue and 
+    return physical books in seconds with zero manual typing.
+  </p>
+
+  <div class="subsection-title">2. Digital eBook & PDF Reader</div>
+  <p>
+    Embedding an in-browser PDF reader will permit patrons to read open-access research papers and digital publications 
+    directly within the web portal.
+  </p>
+
+  <div class="subsection-title">3. Automated SMS & Email Reminders</div>
+  <p>
+    Future enhancements could include automated SMS or email reminders dispatched 48 hours before an item's due date.
+  </p>
+
+  <div class="subsection-title">4. Online Fine Payment Gateway</div>
+  <p>
+    Incorporating digital payment gateways (e.g. Razorpay or UPI) would allow students to pay overdue book penalties 
+    directly from their profile dashboard.
+  </p>
+</div>
+
+<!-- ================= PAGE 30: CHAPTER 7 APPENDICES ================= -->
+<div class="page">
+  <div class="chapter-header">
+    <div class="chapter-title">CHAPTER 7</div>
+    <div class="chapter-subtitle">APPENDICES</div>
+  </div>
+
+  <div class="section-title">APPENDIX I — SOURCE CODE</div>
+
+  <div class="subsection-title">useDebounce.js (Custom Hook for Search Performance)</div>
+  <div class="code-block">import { useState, useEffect } from "react";
+
+export function useDebounce(value, delay = 400) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    // Cancel timeout if value updates before delay expires
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
+export default useDebounce;</div>
+
+  <div class="subsection-title">loanController.js (Circulation & Stock Update Logic)</div>
+  <div class="code-block">// Issue book to member & decrement stock count
+const issueBook = async (req, res) => {
+  const { bookId, memberId, durationDays = 14 } = req.body;
+  const book = await Book.findById(bookId);
+  if (!book || book.availableCopies &lt;= 0) {
+    return res.status(400).json({ message: "No copies available" });
+  }
+
+  const dueDate = new Date();
+  dueDate.setDate(new Date().getDate() + Number(durationDays));
+
+  const loan = await Loan.create({
+    book: book._id,
+    member: req.user.role === 'Member' ? req.user._id : memberId,
+    dueDate,
+    status: 'borrowed',
+  });
+
+  book.availableCopies -= 1;
+  await book.save();
+  res.status(201).json(loan);
+};</div>
+</div>
+
+<!-- ================= PAGE 31: APPENDIX II SCREENSHOTS (HOME) ================= -->
+<div class="page">
+  <div class="section-title">APPENDIX II — SCREENSHOTS</div>
+
+  <div style="border: 2px solid #e2e8f0; border-radius: 8px; padding: 15px; margin: 20px auto; background: white; max-width: 90%; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+    <div style="background: #0f172a; color: white; padding: 10px 15px; border-radius: 6px; font-weight: bold; font-family: sans-serif; display: flex; justify-content: space-between;">
+      <span>📖 Library Portal</span>
+      <span style="font-size: 9pt; color: #94a3b8;">Home | Catalog | Dashboard | Login</span>
+    </div>
+    <div style="padding: 25px; text-align: center; background: #f8fafc; margin-top: 10px; border-radius: 6px;">
+      <div style="display: inline-block; background: #e0e7ff; color: #4338ca; padding: 4px 12px; border-radius: 20px; font-size: 8.5pt; font-family: sans-serif; font-weight: bold; margin-bottom: 10px;">
+        ✨ Modern MERN Library Management
+      </div>
+      <h2 style="font-family: sans-serif; font-size: 18pt; color: #0f172a; margin: 5px 0;">
+        Discover Knowledge with <span style="color: #2563eb;">Library Portal</span>
+      </h2>
+      <p style="font-family: sans-serif; font-size: 10pt; color: #64748b; max-width: 480px; margin: 8px auto;">
+        Fast debounced search, automated inventory tracking, and real-time circulation lending for Members and Staff.
+      </p>
+      <div style="display: flex; justify-content: center; gap: 10px; margin-top: 15px;">
+        <span style="background: #2563eb; color: white; padding: 6px 16px; border-radius: 20px; font-size: 9pt; font-family: sans-serif; font-weight: bold;">Explore Books</span>
+        <span style="background: white; border: 1px solid #cbd5e1; color: #0f172a; padding: 6px 16px; border-radius: 20px; font-size: 9pt; font-family: sans-serif;">Portal Login</span>
+      </div>
+    </div>
+  </div>
+  <div class="fig-caption">Fig. A.2.1. Home Page</div>
+</div>
+
+<!-- ================= PAGE 32: LOGIN & BOOKS DIRECTORY ================= -->
+<div class="page">
+  <div style="border: 2px solid #e2e8f0; border-radius: 8px; padding: 15px; margin: 15px auto; background: white; max-width: 75%; text-align: center;">
+    <h3 style="font-family: sans-serif; font-size: 14pt; margin-bottom: 5px;">Portal Login</h3>
+    <p style="font-family: sans-serif; font-size: 9pt; color: #64748b; margin-bottom: 12px;">Sign in to access your library dashboard</p>
+    <div style="background: #f1f5f9; padding: 8px; border-radius: 6px; font-size: 8pt; font-family: sans-serif; margin-bottom: 12px;">
+      <strong>⚡ 1-Click Demo Login:</strong>
+      <span style="background: #fee2e2; color: #dc2626; padding: 2px 6px; border-radius: 4px; margin: 0 3px;">Admin</span>
+      <span style="background: #fef3c7; color: #d97706; padding: 2px 6px; border-radius: 4px; margin: 0 3px;">Librarian</span>
+      <span style="background: #dbeafe; color: #2563eb; padding: 2px 6px; border-radius: 4px; margin: 0 3px;">Member</span>
+    </div>
+    <div style="text-align: left; font-family: sans-serif; font-size: 8.5pt;">
+      <label>Email Address</label>
+      <div style="border: 1px solid #cbd5e1; padding: 6px; border-radius: 4px; margin-bottom: 8px; color: #64748b;">member@library.com</div>
+      <label>Password</label>
+      <div style="border: 1px solid #cbd5e1; padding: 6px; border-radius: 4px; margin-bottom: 12px; color: #64748b;">••••••••••</div>
+      <div style="background: #2563eb; color: white; text-align: center; padding: 8px; border-radius: 4px; font-weight: bold;">Sign In</div>
+    </div>
+  </div>
+  <div class="fig-caption">Fig. A.2.2. Login Page</div>
+
+  <div style="border: 2px solid #e2e8f0; border-radius: 8px; padding: 12px; margin: 15px auto; background: white; max-width: 90%;">
+    <div style="font-family: sans-serif; font-size: 11pt; font-weight: bold; margin-bottom: 6px;">
+      📚 Library Catalog Directory
+    </div>
+    <div style="display: flex; gap: 8px; margin-bottom: 10px; font-family: sans-serif; font-size: 8pt;">
+      <span style="border: 1px solid #cbd5e1; padding: 4px 8px; border-radius: 4px; flex-grow: 1; color: #64748b;">🔍 Debounced Search: Title, Author, ISBN...</span>
+      <span style="background: #2563eb; color: white; padding: 4px 10px; border-radius: 15px;">All</span>
+      <span style="background: #f1f5f9; padding: 4px 10px; border-radius: 15px;">Computer Science</span>
+      <span style="background: #f1f5f9; padding: 4px 10px; border-radius: 15px;">Literature</span>
+    </div>
+  </div>
+  <div class="fig-caption">Fig. A.2.3. Books Directory Page</div>
+</div>
+
+<!-- ================= PAGE 33: BOOK DETAILS & CHECKOUT ================= -->
+<div class="page">
+  <div style="border: 2px solid #e2e8f0; border-radius: 8px; padding: 15px; margin: 20px auto; background: white; max-width: 90%; font-family: sans-serif;">
+    <div style="display: flex; gap: 20px; align-items: flex-start;">
+      <div style="width: 120px; height: 160px; background: #e2e8f0; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #64748b; font-size: 9pt;">
+        Book Cover
+      </div>
+      <div style="flex-grow: 1;">
+        <span style="background: #dbeafe; color: #1d4ed8; padding: 2px 8px; border-radius: 4px; font-size: 8pt; font-weight: bold;">Computer Science</span>
+        <span style="background: #dcfce7; color: #15803d; padding: 2px 8px; border-radius: 4px; font-size: 8pt; font-weight: bold; margin-left: 5px;">4 Available</span>
+        <h3 style="font-size: 13pt; margin: 6px 0;">Clean Code: A Handbook of Agile Software Craftsmanship</h3>
+        <div style="font-size: 9pt; color: #64748b; margin-bottom: 8px;">By Robert C. Martin • ISBN: 978-0132350884 • 2008</div>
+        <p style="font-size: 8.5pt; color: #475569; line-height: 1.4; margin-bottom: 12px;">
+          Even bad code can function. But if code isn't clean, it can bring a development organization to its knees. 
+          This volume teaches software craftsmanship and clean refactoring patterns.
+        </p>
+        <span style="background: #2563eb; color: white; padding: 6px 14px; border-radius: 20px; font-size: 8.5pt; font-weight: bold;">
+          📖 Borrow This Book
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="fig-caption">Fig. A.2.4. Book Details & Checkout Page</div>
+</div>
+
+<!-- ================= PAGE 34: DASHBOARD ================= -->
+<div class="page">
+  <div style="border: 2px solid #e2e8f0; border-radius: 8px; padding: 15px; margin: 15px auto; background: white; max-width: 90%; font-family: sans-serif;">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 12px;">
+      <div>
+        <h4 style="margin: 0; font-size: 12pt;">Operations Dashboard</h4>
+        <span style="font-size: 8pt; color: #64748b;">Live circulation stats and quick action shortcuts</span>
+      </div>
+      <span style="background: #e0e7ff; color: #3730a3; padding: 3px 8px; border-radius: 4px; font-size: 8pt; font-weight: bold;">Librarian View</span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 15px;">
+      <div style="border: 1px solid #e2e8f0; padding: 8px; border-radius: 6px; text-align: center;">
+        <div style="font-size: 7.5pt; color: #64748b;">TOTAL TITLES</div>
+        <div style="font-size: 14pt; font-weight: bold; color: #0f172a;">10</div>
+      </div>
+      <div style="border: 1px solid #e2e8f0; padding: 8px; border-radius: 6px; text-align: center;">
+        <div style="font-size: 7.5pt; color: #64748b;">AVAILABLE COPIES</div>
+        <div style="font-size: 14pt; font-weight: bold; color: #16a34a;">42</div>
+      </div>
+      <div style="border: 1px solid #e2e8f0; padding: 8px; border-radius: 6px; text-align: center;">
+        <div style="font-size: 7.5pt; color: #64748b;">ACTIVE LOANS</div>
+        <div style="font-size: 14pt; font-weight: bold; color: #0284c7;">2</div>
+      </div>
+      <div style="border: 1px solid #e2e8f0; padding: 8px; border-radius: 6px; text-align: center;">
+        <div style="font-size: 7.5pt; color: #64748b;">OVERDUE ITEMS</div>
+        <div style="font-size: 14pt; font-weight: bold; color: #dc2626;">1</div>
+      </div>
+    </div>
+
+    <div style="font-size: 9pt; font-weight: bold; margin-bottom: 6px;">Recent Lending Activity</div>
+    <div style="font-size: 8pt; color: #475569; border-top: 1px solid #f1f5f9; padding-top: 6px;">
+      • Clean Code — Borrowed by Alex Turner (Due in 4 Days) [Active]<br>
+      • Designing Data-Intensive Applications — Sarah Connor [Overdue]
+    </div>
+  </div>
+  <div class="fig-caption">Fig. A.2.5. Dashboard Page</div>
+</div>
+
+<!-- ================= PAGE 35: LOAN MANAGEMENT ================= -->
+<div class="page">
+  <div style="border: 2px solid #e2e8f0; border-radius: 8px; padding: 15px; margin: 15px auto; background: white; max-width: 90%; font-family: sans-serif;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+      <span style="font-weight: bold; font-size: 11pt;">🔄 Circulation & Loan Ledger</span>
+      <span style="background: #2563eb; color: white; padding: 4px 10px; border-radius: 12px; font-size: 8pt;">+ Issue Book</span>
+    </div>
+
+    <table style="font-size: 8pt; margin: 0; width: 100%;">
+      <thead>
+        <tr style="background: #f8fafc;">
+          <th>Book</th>
+          <th>Borrower</th>
+          <th>Due Date</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Clean Code</td>
+          <td>Alex Turner</td>
+          <td>20/09/2026</td>
+          <td><span style="background: #dbeafe; color: #1d4ed8; padding: 2px 6px; border-radius: 4px;">borrowed</span></td>
+          <td><span style="color: #16a34a; font-weight: bold;">Return</span></td>
+        </tr>
+        <tr>
+          <td>Designing Data-Intensive Apps</td>
+          <td>Sarah Connor</td>
+          <td>10/09/2026</td>
+          <td><span style="background: #fee2e2; color: #dc2626; padding: 2px 6px; border-radius: 4px;">overdue</span></td>
+          <td><span style="color: #16a34a; font-weight: bold;">Return</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="fig-caption">Fig. A.2.6. Loan Management Page</div>
+</div>
+
+<!-- ================= PAGE 36: REFERENCES ================= -->
+<div class="page">
+  <div class="text-center bold uppercase" style="font-size: 13pt; margin-top: 30px; margin-bottom: 30px;">
+    REFERENCES
+  </div>
+
+  <div class="section-title">Web References</div>
+  <ul>
+    <li>[1] React Official Documentation: https://react.dev/learn</li>
+    <li>[2] React Router Documentation: https://reactrouter.com/</li>
+    <li>[3] Node.js Official Documentation: https://nodejs.org/en/docs</li>
+    <li>[4] Express.js Official Documentation: https://expressjs.com/</li>
+    <li>[5] MongoDB Official Documentation: https://www.mongodb.com/docs/</li>
+    <li>[6] Mongoose Official Documentation: https://mongoosejs.com/docs/</li>
+    <li>[7] JSON Web Token (JWT) Official Documentation: https://jwt.io/introduction/</li>
+    <li>[8] Axios Documentation: https://axios-http.com/docs/intro</li>
+  </ul>
+
+  <div class="section-title" style="margin-top: 25px;">Book References</div>
+  <ul>
+    <li>[1] Robert C. Martin (2008), <em>Clean Code: A Handbook of Agile Software Craftsmanship</em>, Prentice Hall</li>
+    <li>[2] Kyle Simpson (2015), <em>You Don't Know JS (Book Series)</em>, O'Reilly Media</li>
+    <li>[3] Ethan Brown (2019), <em>Web Development with Node and Express</em>, O'Reilly Media</li>
+    <li>[4] Stoyan Stefanov (2013), <em>React: Up and Running: Building Web Applications</em>, O'Reilly Media</li>
+    <li>[5] Kristina Chodorow (2013), <em>MongoDB: The Definitive Guide</em>, O'Reilly Media</li>
+  </ul>
+</div>
+
+</body>
+</html>
