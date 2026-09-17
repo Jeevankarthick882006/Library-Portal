@@ -273,3 +273,5 @@ Use these explanations when presenting your final project to professors or inter
 
 ## 📄 License
 This project is open-source and created for educational purposes. Feel free to use and adapt it for academic demonstrations!
+#   L i b r a r y - U s e r s  
+ 
